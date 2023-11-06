@@ -5,12 +5,10 @@ import './App.css';
 
 function App() {
   return (
-    <>
-      <LandingPage leftGrowFlex={1} rightGrowFlex={1}>
-        <LandingPageDescription />
-        <DeskImage />
-      </LandingPage>
-    </>
+    <LandingPage leftGrowFlex={1} rightGrowFlex={1}>
+      <LandingPageDescription />
+      <DeskImage />
+    </LandingPage>
   );
 }
 

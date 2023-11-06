@@ -1,11 +1,4 @@
-import { Typography, styled } from '@mui/material';
-
-const LandingPageDescriptionStyle = styled('div')({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  flexDirection: 'column',
-});
+import { Box, Typography, styled } from '@mui/material';
 
 const headerStyle = {
   color: 'blue',
@@ -14,7 +7,11 @@ const headerStyle = {
 const LandingPageDescription: React.FC = () => {
   return (
     <>
-      <Typography variant="h2" component="div">
+      <Typography
+        variant="h2"
+        component="div"
+        sx={{ fontWeight: '700', paddingY: '2rem' }}
+      >
         Find your{' '}
         <span style={headerStyle}>
           dream <br></br>job
