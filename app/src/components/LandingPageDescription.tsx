@@ -1,4 +1,4 @@
-import { Box, Typography, styled } from '@mui/material';
+import { Typography } from '@mui/material';
 
 const headerStyle = {
   color: 'blue',
