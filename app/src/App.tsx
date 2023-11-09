@@ -1,6 +1,6 @@
 import DeskImage from '../src/assets/desk.svg?react';
-import LandingPageDescription from './components/LandingPageDescription';
-import LandingPage from './containers/LandingPage';
+import LandingPageDescription from './modules/landingPage/LandingPageDescription';
+import LandingPage from './modules/landingPage/LandingPage';
 import './App.css';
 
 function App() {

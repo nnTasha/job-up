@@ -1,18 +1,6 @@
 import { FC, ReactElement, ReactNode } from 'react';
-import { Box, Container } from '@mui/material';
-import { styled } from '@mui/system';
-
-const StyledBox = styled(Box)<{ flexGrow: number }>(
-  {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
-  },
-  (props) => ({
-    flexGrow: props.flexGrow,
-  })
-);
+import { Container } from '@mui/material';
+import { StyledBox } from './styles';
 
 interface LandingPageProps {
   children: ReactNode;
