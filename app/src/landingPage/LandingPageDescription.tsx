@@ -1,19 +1,12 @@
 import { Typography } from '@mui/material';
-
-const headerStyle = {
-  color: 'blue',
-};
+import { descriptionStyles } from './styles';
 
 const LandingPageDescription: React.FC = () => {
   return (
     <>
-      <Typography
-        variant="h2"
-        component="div"
-        sx={{ fontWeight: '700', paddingY: '2rem' }}
-      >
+      <Typography variant="h2" component="div" sx={descriptionStyles.title}>
         Find your{' '}
-        <span style={headerStyle}>
+        <span style={{ color: 'blue' }}>
           dream <br></br>job
         </span>{' '}
         today

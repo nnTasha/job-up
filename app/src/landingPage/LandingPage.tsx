@@ -16,7 +16,7 @@ const LandingPage: FC<LandingPageProps> = ({
   const [description, deskImage] = children as ReactElement[];
 
   return (
-    <Container sx={{ display: 'flex' }}>
+    <Container sx={{ display: 'flex', placeItems: 'center' }}>
       <StyledBox flexGrow={leftGrowFlex}>{description}</StyledBox>
       <StyledBox flexGrow={rightGrowFlex}>{deskImage}</StyledBox>
     </Container>

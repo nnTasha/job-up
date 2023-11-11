@@ -1,14 +1,18 @@
 import DeskImage from '../src/assets/desk.svg?react';
-import LandingPageDescription from './modules/landingPage/LandingPageDescription';
-import LandingPage from './modules/landingPage/LandingPage';
+import LandingPageDescription from './landingPage/LandingPageDescription';
+import LandingPage from './landingPage/LandingPage';
 import './App.css';
+import Header from './common/components/Header/Header';
 
 function App() {
   return (
-    <LandingPage leftGrowFlex={1} rightGrowFlex={1}>
-      <LandingPageDescription />
-      <DeskImage />
-    </LandingPage>
+    <>
+      <Header />
+      <LandingPage leftGrowFlex={1} rightGrowFlex={1}>
+        <LandingPageDescription />
+        <DeskImage />
+      </LandingPage>
+    </>
   );
 }
 
