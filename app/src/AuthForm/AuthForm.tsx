@@ -12,15 +12,22 @@ import {
 import LaunchIcon from '../assets/launch.svg?react';
 import ClearIcon from '@mui/icons-material/Clear';
 import { cardStyles } from './styles';
+import { useNavigate } from 'react-router-dom';
 
 interface AuthFormProps {
   title: string;
 }
 
 const AuthForm: FC<AuthFormProps> = ({ title }) => {
+  const navigate = useNavigate();
+
+  const handleCloseButton = () => {
+    navigate('/');
+  };
+
   return (
     <Card sx={cardStyles.card}>
-      <IconButton sx={cardStyles.iconButton}>
+      <IconButton sx={cardStyles.iconButton} onClick={handleCloseButton}>
         <ClearIcon sx={cardStyles.iconImage} />
       </IconButton>
       <Typography sx={cardStyles.text}>{title}</Typography>
@@ -33,13 +40,15 @@ const AuthForm: FC<AuthFormProps> = ({ title }) => {
           margin="dense"
           sx={cardStyles.inputField}
         />
-        <TextField
-          id="email"
-          label="Your email"
-          size="small"
-          margin="dense"
-          sx={cardStyles.inputField}
-        />
+        {title === 'Sign Up' && (
+          <TextField
+            id="email"
+            label="Your email"
+            size="small"
+            margin="dense"
+            sx={cardStyles.inputField}
+          />
+        )}
         <TextField
           id="password"
           label="Your password"
