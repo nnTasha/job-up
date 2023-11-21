@@ -1,8 +1,34 @@
+import { FC, useEffect, useState } from 'react';
 import { Box, Button, Grid } from '@mui/material';
+import { useNavigate } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import Label from '../Label/Label';
+import { formatPath } from './utils';
 import { headerStyles } from './styles';
 
-const Header = () => {
+interface HeaderProps {}
+
+const Header: FC<HeaderProps> = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [buttonVisibility, setButtonVisibility] = useState(true);
+  const [pathToNavigate, setPath] = useState('');
+
+  const handleNavigationClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const newPath = formatPath(e.currentTarget.innerText);
+    setPath(newPath);
+    navigate(`/${newPath}`);
+  };
+
+  useEffect(() => {
+    if (location.pathname !== '/') {
+      setButtonVisibility(false);
+    } else {
+      setButtonVisibility(true);
+    }
+  }, [location]);
+
   return (
     <Grid
       container
@@ -15,8 +41,16 @@ const Header = () => {
       </Grid>
       <Grid item>
         <Box display="flex" alignItems="center">
-          <Button sx={headerStyles.button}>Sign up</Button>
-          <Button variant="contained">Sign In</Button>
+          {buttonVisibility && (
+            <>
+              <Button sx={headerStyles.button} onClick={handleNavigationClick}>
+                Sign up
+              </Button>
+              <Button variant="contained" onClick={handleNavigationClick}>
+                Sign In
+              </Button>
+            </>
+          )}
         </Box>
       </Grid>
     </Grid>

@@ -13,6 +13,7 @@ export const router = createBrowserRouter(
       <Route element={<PublicLayout />}>
         <Route path="/" element={<App />} />
         <Route path="signup" element={<AuthForm title="Sign Up" />} />
+        <Route path="signin" element={<AuthForm title="Sign In" />} />
       </Route>
     </>
   )
