@@ -1,16 +1,17 @@
-import { Box, Button, Chip, Grid, Typography } from '@mui/material';
+import { Box, Button, Grid } from '@mui/material';
+import Label from '../Label/Label';
 import { headerStyles } from './styles';
 
 const Header = () => {
   return (
-    <Grid container alignItems="center" justifyContent="space-between">
+    <Grid
+      container
+      alignItems="center"
+      justifyContent="space-between"
+      sx={{ width: '80rem' }}
+    >
       <Grid item>
-        <Box display="flex" alignItems="center">
-          <Chip sx={headerStyles.chip} label="JT" color="primary" />
-          <Typography variant="h4" component="div" sx={headerStyles.title}>
-            JobGet
-          </Typography>
-        </Box>
+        <Label />
       </Grid>
       <Grid item>
         <Box display="flex" alignItems="center">
