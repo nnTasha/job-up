@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { Box, Button, Grid } from '@mui/material';
 import { useNavigate } from 'react-router';
 import { useLocation } from 'react-router-dom';
-import Label from '../Label/Label';
+import Label from '../label/Label';
 import { formatPath } from './utils';
 import { headerStyles } from './styles';
 

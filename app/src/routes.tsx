@@ -3,9 +3,9 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom';
-import AuthForm from './AuthForm/AuthForm';
+import AuthForm from './authForm/AuthForm';
 import App from './App';
-import PublicLayout from './layout/PublicLayout/PublicLayout';
+import PublicLayout from './layout/publicLayout/PublicLayout';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
