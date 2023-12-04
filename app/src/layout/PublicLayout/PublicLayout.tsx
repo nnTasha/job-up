@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material';
 import { FC } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 import SignIn from '../../common/components/signIn/SignIn';
 import SignUp from '../../common/components/signUp/SignUp';
@@ -10,48 +10,23 @@ import theme from '../../theme';
 interface PublicLayoutProps {}
 
 const PublicLayout: FC<PublicLayoutProps> = () => {
+  const currentLocation = useLocation();
+  const shouldBeVisible = currentLocation.pathname == '/';
+
   return (
-    <Grid
-      container
-      rowSpacing={10}
-      sx={{
-        [theme.breakpoints.down('md')]: {
-          display: 'flex',
-          justifyContent: 'center',
-        },
-      }}
-    >
-      <Grid
-        item
-        md={6}
-        order={{ xs: 1, md: 1 }}
-        sx={{
-          [theme.breakpoints.down('md')]: {
-            display: 'flex',
-            justifyContent: 'center',
-          },
-        }}
-      >
+    <Grid container rowSpacing={10} sx={containerStyle}>
+      <Grid item md={6} order={{ xs: 1, md: 1 }} sx={labelStyle}>
         <Label />
       </Grid>
-      <Grid
-        item
-        xs={12}
-        md={6}
-        order={{ xs: 3, md: 2 }}
-        sx={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          [theme.breakpoints.down('md')]: {
-            flexDirection: 'column',
-            rowGap: '3.5rem',
-          },
-        }}
-      >
-        <SignUp />
-        <SignIn />
+      <Grid item xs={12} md={6} order={{ xs: 3, md: 2 }} sx={authButtonsStyle}>
+        {shouldBeVisible && (
+          <>
+            <SignUp />
+            <SignIn />
+          </>
+        )}
       </Grid>
-      <Grid item xs={12} order={{ xs: 2, md: 3 }}>
+      <Grid item xs={12} order={{ xs: 2, md: 3 }} sx={sectionStyle}>
         <Outlet />
       </Grid>
     </Grid>
@@ -59,3 +34,32 @@ const PublicLayout: FC<PublicLayoutProps> = () => {
 };
 
 export default PublicLayout;
+
+const containerStyle = {
+  [theme.breakpoints.down('md')]: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+};
+
+const labelStyle = {
+  [theme.breakpoints.down('md')]: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+};
+
+const authButtonsStyle = {
+  display: 'flex',
+  justifyContent: 'flex-end',
+  [theme.breakpoints.down('md')]: {
+    flexDirection: 'column',
+    rowGap: '3.5rem',
+  },
+};
+
+const sectionStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+  width: '100%',
+};

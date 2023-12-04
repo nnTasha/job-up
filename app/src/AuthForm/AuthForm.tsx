@@ -11,42 +11,48 @@ import {
 } from '@mui/material';
 import LaunchIcon from '../assets/launch.svg?react';
 import ClearIcon from '@mui/icons-material/Clear';
-import { cardStyles } from './styles';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import theme from '../theme';
 
-interface AuthFormProps {
-  title: string;
-}
+interface AuthFormProps {}
 
-const AuthForm: FC<AuthFormProps> = ({ title }) => {
+const pageTitle = {
+  '/signin': 'SIGN IN',
+  '/signup': 'SIGN UP',
+};
+
+const AuthForm: FC<AuthFormProps> = () => {
   const navigate = useNavigate();
 
-  const handleCloseButton = () => {
-    navigate('/');
-  };
+  const location = useLocation();
+
+  const cardTitle = pageTitle[location.pathname as '/signin' | '/signup'] || '';
+
+  const isSignUp = cardTitle === 'SIGN UP';
 
   return (
-    <Card sx={cardStyles.card}>
-      <IconButton sx={cardStyles.iconButton} onClick={handleCloseButton}>
-        <ClearIcon sx={cardStyles.iconImage} />
+    <Card sx={cardStyle} className="CARD">
+      <IconButton sx={iconButtonStyle} onClick={() => navigate('/')}>
+        <ClearIcon sx={iconImageStyle} />
       </IconButton>
-      <Typography sx={cardStyles.text}>{title}</Typography>
-      <SvgIcon component={LaunchIcon} inheritViewBox sx={cardStyles.svgIcon} />
-      <CardContent sx={cardStyles.fieldsContainer}>
+      <Typography sx={textStyle}>{cardTitle}</Typography>
+      <SvgIcon component={LaunchIcon} inheritViewBox sx={svgIconStyle} />
+      <CardContent sx={fieldsContainerStyle}>
+        {/* Will change to Formik */}
         <TextField
           id="user-name"
           label="Your username"
           size="small"
           margin="dense"
-          sx={cardStyles.inputField}
+          sx={inputFieldStyle}
         />
-        {title === 'Sign Up' && (
+        {isSignUp && (
           <TextField
             id="email"
             label="Your email"
             size="small"
             margin="dense"
-            sx={cardStyles.inputField}
+            sx={inputFieldStyle}
           />
         )}
         <TextField
@@ -54,15 +60,15 @@ const AuthForm: FC<AuthFormProps> = ({ title }) => {
           label="Your password"
           size="small"
           margin="dense"
-          sx={cardStyles.inputField}
+          sx={inputFieldStyle}
         />
-        <Link href="#" underline="none" sx={cardStyles.restorePass}>
+        <Link href="#" underline="none" sx={restorePassStyle}>
           Forgot password ?
         </Link>
-        <Button variant="contained" color="primary" sx={cardStyles.signButton}>
-          {title}
+        <Button variant="contained" color="primary" sx={signButtonStyle}>
+          Continue
         </Button>
-        <Typography sx={cardStyles.existingUser}>
+        <Typography sx={existingUserStyle}>
           Already have an account?{' '}
           <Link href="#" underline="none">
             Log In
@@ -74,3 +80,71 @@ const AuthForm: FC<AuthFormProps> = ({ title }) => {
 };
 
 export default AuthForm;
+
+const cardStyle = {
+  display: 'flex',
+  width: '35rem',
+  height: 'auto',
+  flexDirection: 'column',
+  alignItems: 'center',
+  boxShadow: '0 0 80px  rgb(0 0 0 / 0.1)',
+
+  position: 'relative',
+  overflow: 'visible',
+
+  [theme.breakpoints.down('md')]: {
+    width: '22rem',
+    '& .MuiPaper-root': {
+      //investigate how to adjust the height
+    },
+  },
+};
+
+const iconButtonStyle = {
+  position: 'absolute',
+  right: '-1rem',
+  top: '-1rem',
+  fontSize: '21rem',
+};
+
+const iconImageStyle = {
+  fontSize: '20px',
+  color: 'rgb(84, 82, 82)',
+  backgroundColor: 'rgb(236, 231, 231)',
+  borderRadius: '50%',
+};
+
+const textStyle = {
+  padding: '2rem',
+  fontWeight: '700',
+  fontSize: '1.5rem',
+};
+const svgIconStyle = {
+  width: '12rem',
+  height: '30%',
+  filter: 'drop-shadow(-10px -8px 45px rgb(0 0 0 / 0.4))',
+};
+const fieldsContainerStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  marginBottom: '1rem',
+};
+const inputFieldStyle = {
+  minWidth: '20rem',
+  minHeight: '1rem',
+};
+const restorePassStyle = {
+  alignSelf: 'flex-end',
+  fontSize: '0.7rem',
+  mb: '0.6rem',
+};
+
+const signButtonStyle = {
+  margin: '1rem',
+  width: '100%',
+  m: '0',
+};
+const existingUserStyle = {
+  fontSize: '0.7rem',
+  mt: '0.6rem',
+};

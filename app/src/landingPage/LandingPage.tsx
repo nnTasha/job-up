@@ -8,25 +8,8 @@ interface LandingPageProps {
 
 const LandingPage: FC<LandingPageProps> = ({ description, content }) => {
   return (
-    <Grid
-      container
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        [theme.breakpoints.down('md')]: {
-          paddingY: '13rem',
-        },
-      }}
-    >
-      <Grid
-        item
-        xs={4}
-        sx={{
-          [theme.breakpoints.down('md')]: {
-            display: 'none',
-          },
-        }}
-      >
+    <Grid container sx={containerStyle}>
+      <Grid item xs={4} sx={descriptionStyle}>
         {description}
       </Grid>
       <Grid item xs={12} md={6}>
@@ -37,3 +20,17 @@ const LandingPage: FC<LandingPageProps> = ({ description, content }) => {
 };
 
 export default LandingPage;
+
+const containerStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+  [theme.breakpoints.down('md')]: {
+    paddingY: '5rem',
+  },
+};
+
+const descriptionStyle = {
+  [theme.breakpoints.down('md')]: {
+    display: 'none',
+  },
+};
