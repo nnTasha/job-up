@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import {
   Button,
-  Card,
   CardContent,
   IconButton,
   Link,
+  Paper,
   SvgIcon,
   TextField,
   Typography,
@@ -31,9 +31,9 @@ const AuthForm: FC<AuthFormProps> = () => {
   const isSignUp = cardTitle === 'SIGN UP';
 
   return (
-    <Card sx={cardStyle} className="CARD">
-      <IconButton sx={iconButtonStyle} onClick={() => navigate('/')}>
-        <ClearIcon sx={iconImageStyle} />
+    <Paper sx={containerStyle}>
+      <IconButton sx={clearIconButtonStyle} onClick={() => navigate('/')}>
+        <ClearIcon sx={clearIconStyle} />
       </IconButton>
       <Typography sx={textStyle}>{cardTitle}</Typography>
       <SvgIcon component={LaunchIcon} inheritViewBox sx={svgIconStyle} />
@@ -65,7 +65,7 @@ const AuthForm: FC<AuthFormProps> = () => {
         <Link href="#" underline="none" sx={restorePassStyle}>
           Forgot password ?
         </Link>
-        <Button variant="contained" color="primary" sx={signButtonStyle}>
+        <Button variant="contained" color="primary" sx={continueButtonStyle}>
           Continue
         </Button>
         <Typography sx={existingUserStyle}>
@@ -75,16 +75,15 @@ const AuthForm: FC<AuthFormProps> = () => {
           </Link>
         </Typography>
       </CardContent>
-    </Card>
+    </Paper>
   );
 };
 
 export default AuthForm;
 
-const cardStyle = {
+const containerStyle = {
   display: 'flex',
   width: '35rem',
-  height: 'auto',
   flexDirection: 'column',
   alignItems: 'center',
   boxShadow: '0 0 80px  rgb(0 0 0 / 0.1)',
@@ -93,21 +92,24 @@ const cardStyle = {
   overflow: 'visible',
 
   [theme.breakpoints.down('md')]: {
-    width: '22rem',
-    '& .MuiPaper-root': {
-      //investigate how to adjust the height
-    },
+    width: '100%',
+    height: '40rem',
+    boxShadow: 'none',
   },
 };
 
-const iconButtonStyle = {
+const clearIconButtonStyle = {
   position: 'absolute',
   right: '-1rem',
   top: '-1rem',
   fontSize: '21rem',
+  [theme.breakpoints.down('md')]: {
+    right: '1rem',
+    top: '1rem',
+  },
 };
 
-const iconImageStyle = {
+const clearIconStyle = {
   fontSize: '20px',
   color: 'rgb(84, 82, 82)',
   backgroundColor: 'rgb(236, 231, 231)',
@@ -136,15 +138,13 @@ const inputFieldStyle = {
 const restorePassStyle = {
   alignSelf: 'flex-end',
   fontSize: '0.7rem',
-  mb: '0.6rem',
+  marginBottom: '0.6rem',
 };
 
-const signButtonStyle = {
-  margin: '1rem',
+const continueButtonStyle = {
   width: '100%',
-  m: '0',
 };
 const existingUserStyle = {
   fontSize: '0.7rem',
-  mt: '0.6rem',
+  marginTop: '0.6rem',
 };

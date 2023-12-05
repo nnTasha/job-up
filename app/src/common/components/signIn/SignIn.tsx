@@ -12,8 +12,7 @@ const SignIn = () => {
       onClick={() => navigate(`/${SIGN_IN}`)}
       sx={{
         [theme.breakpoints.down('md')]: {
-          marginRight: '0',
-          fontSize: '1.7rem',
+          fontSize: '1.5rem',
         },
       }}
     >

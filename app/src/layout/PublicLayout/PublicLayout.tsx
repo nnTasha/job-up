@@ -36,6 +36,7 @@ const PublicLayout: FC<PublicLayoutProps> = () => {
 export default PublicLayout;
 
 const containerStyle = {
+  paddingY: '2rem',
   [theme.breakpoints.down('md')]: {
     display: 'flex',
     justifyContent: 'center',
@@ -54,7 +55,8 @@ const authButtonsStyle = {
   justifyContent: 'flex-end',
   [theme.breakpoints.down('md')]: {
     flexDirection: 'column',
-    rowGap: '3.5rem',
+    margin: '1rem',
+    rowGap: '1rem',
   },
 };
 

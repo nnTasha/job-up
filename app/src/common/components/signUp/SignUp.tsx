@@ -14,7 +14,7 @@ const SignUp = () => {
         marginRight: '0.5rem',
         [theme.breakpoints.down('md')]: {
           marginRight: '0',
-          fontSize: '1.7rem',
+          fontSize: '1.5rem',
         },
       }}
       onClick={() => navigate('/signup')}
