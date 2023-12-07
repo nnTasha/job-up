@@ -1,27 +1,24 @@
 import { FC } from 'react';
 import {
-  Button,
-  CardContent,
+  Box,
   IconButton,
   Link,
   Paper,
   SvgIcon,
-  TextField,
   Typography,
 } from '@mui/material';
 import LaunchIcon from '../assets/launch.svg?react';
 import ClearIcon from '@mui/icons-material/Clear';
 import { useLocation, useNavigate } from 'react-router-dom';
 import theme from '../theme';
-
-interface AuthFormProps {}
+import AuthForm from './AuthForm';
 
 const pageTitle = {
   '/signin': 'SIGN IN',
   '/signup': 'SIGN UP',
 };
 
-const AuthForm: FC<AuthFormProps> = () => {
+const AuthPage: FC = () => {
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -37,49 +34,22 @@ const AuthForm: FC<AuthFormProps> = () => {
       </IconButton>
       <Typography sx={textStyle}>{cardTitle}</Typography>
       <SvgIcon component={LaunchIcon} inheritViewBox sx={svgIconStyle} />
-      <CardContent sx={fieldsContainerStyle}>
-        {/* Will change to Formik */}
-        <TextField
-          id="user-name"
-          label="Your username"
-          size="small"
-          margin="dense"
-          sx={inputFieldStyle}
-        />
+      <Box sx={boxStyle}>
+        <AuthForm isSignUp={isSignUp} />
         {isSignUp && (
-          <TextField
-            id="email"
-            label="Your email"
-            size="small"
-            margin="dense"
-            sx={inputFieldStyle}
-          />
+          <Typography sx={existingUserStyle}>
+            Already have an account?{' '}
+            <Link href="/signin" underline="none">
+              Log In
+            </Link>
+          </Typography>
         )}
-        <TextField
-          id="password"
-          label="Your password"
-          size="small"
-          margin="dense"
-          sx={inputFieldStyle}
-        />
-        <Link href="#" underline="none" sx={restorePassStyle}>
-          Forgot password ?
-        </Link>
-        <Button variant="contained" color="primary" sx={continueButtonStyle}>
-          Continue
-        </Button>
-        <Typography sx={existingUserStyle}>
-          Already have an account?{' '}
-          <Link href="#" underline="none">
-            Log In
-          </Link>
-        </Typography>
-      </CardContent>
+      </Box>
     </Paper>
   );
 };
 
-export default AuthForm;
+export default AuthPage;
 
 const containerStyle = {
   display: 'flex',
@@ -126,24 +96,16 @@ const svgIconStyle = {
   height: '30%',
   filter: 'drop-shadow(-10px -8px 45px rgb(0 0 0 / 0.4))',
 };
-const fieldsContainerStyle = {
+const boxStyle = {
   display: 'flex',
   flexDirection: 'column',
   marginBottom: '1rem',
-};
-const inputFieldStyle = {
-  minWidth: '20rem',
-  minHeight: '1rem',
-};
-const restorePassStyle = {
-  alignSelf: 'flex-end',
-  fontSize: '0.7rem',
-  marginBottom: '0.6rem',
+
+  [theme.breakpoints.down('md')]: {
+    width: '75%',
+  },
 };
 
-const continueButtonStyle = {
-  width: '100%',
-};
 const existingUserStyle = {
   fontSize: '0.7rem',
   marginTop: '0.6rem',
