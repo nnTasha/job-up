@@ -1,26 +1,36 @@
-import { FC, ReactElement, ReactNode } from 'react';
-import { Container } from '@mui/material';
-import { StyledBox } from './styles';
-
+import { FC, ReactNode } from 'react';
+import { Grid } from '@mui/material';
+import theme from '../theme';
 interface LandingPageProps {
-  children: ReactNode;
-  leftGrowFlex: number;
-  rightGrowFlex: number;
+  description: ReactNode;
+  content: ReactNode;
 }
 
-const LandingPage: FC<LandingPageProps> = ({
-  leftGrowFlex = 1,
-  rightGrowFlex = 1,
-  children,
-}) => {
-  const [description, deskImage] = children as ReactElement[];
-
+const LandingPage: FC<LandingPageProps> = ({ description, content }) => {
   return (
-    <Container sx={{ display: 'flex', placeItems: 'center' }}>
-      <StyledBox flexGrow={leftGrowFlex}>{description}</StyledBox>
-      <StyledBox flexGrow={rightGrowFlex}>{deskImage}</StyledBox>
-    </Container>
+    <Grid container sx={containerStyle}>
+      <Grid item xs={4} sx={descriptionStyle}>
+        {description}
+      </Grid>
+      <Grid item xs={12} md={6}>
+        {content}
+      </Grid>
+    </Grid>
   );
 };
 
 export default LandingPage;
+
+const containerStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+  [theme.breakpoints.down('md')]: {
+    paddingY: '5rem',
+  },
+};
+
+const descriptionStyle = {
+  [theme.breakpoints.down('md')]: {
+    display: 'none',
+  },
+};
