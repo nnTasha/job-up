@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   Box,
   IconButton,
@@ -9,9 +10,8 @@ import {
 } from '@mui/material';
 import LaunchIcon from '../assets/launch.svg?react';
 import ClearIcon from '@mui/icons-material/Clear';
-import { useLocation, useNavigate } from 'react-router-dom';
-import theme from '../theme';
 import AuthForm from './AuthForm';
+import theme from '../theme';
 
 const pageTitle = {
   '/signin': 'SIGN IN',
@@ -100,6 +100,7 @@ const boxStyle = {
   display: 'flex',
   flexDirection: 'column',
   marginBottom: '1rem',
+  width: '60%',
 
   [theme.breakpoints.down('md')]: {
     width: '75%',
@@ -109,4 +110,8 @@ const boxStyle = {
 const existingUserStyle = {
   fontSize: '0.7rem',
   marginTop: '0.6rem',
+  marginBottom: '2rem',
+  [theme.breakpoints.down('md')]: {
+    marginTop: '1.5rem',
+  },
 };
