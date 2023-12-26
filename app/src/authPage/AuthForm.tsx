@@ -1,5 +1,8 @@
 import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { FormValues } from './types';
+import { AuthenticationService } from '../api';
+import { userSignIn } from './authentication/AccountManagement';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import {
   Button,
@@ -9,8 +12,7 @@ import {
   Link,
   TextField,
 } from '@mui/material';
-import { FormValues } from './types';
-import { createUserRecord } from './utils';
+import { useNavigate } from 'react-router-dom';
 
 interface AuthFormProps {
   isSignUp: boolean;
@@ -32,13 +34,24 @@ const AuthForm: FC<AuthFormProps> = ({ isSignUp }) => {
     formState: { errors },
   } = form;
 
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const onFormSubmit = (data: FormValues) => {
-    createUserRecord(data);
-    console.log(data);
+    isSignUp
+      ? AuthenticationService.authenticationControllerSingUp({
+          //userName : data.username as string,
+          email: data.email as string,
+          password: data.password as string,
+          //confirmPassword : data.confirmPassword as string
+        })
+      : userSignIn({
+          email: data.email as string,
+          password: data.password as string,
+        });
+    // navigate('/user-profile');
   };
 
   return (
