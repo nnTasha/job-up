@@ -1,8 +1,5 @@
 import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormValues } from './types';
-import { AuthenticationService } from '../api';
-import { userSignIn } from './authentication/AccountManagement';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import {
   Button,
@@ -12,7 +9,9 @@ import {
   Link,
   TextField,
 } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { FormValues } from './types';
+import { AuthenticationService } from '../api';
+import { useAuthentication } from './authentication/AccountManagement';
 
 interface AuthFormProps {
   isSignUp: boolean;
@@ -34,7 +33,7 @@ const AuthForm: FC<AuthFormProps> = ({ isSignUp }) => {
     formState: { errors },
   } = form;
 
-  const navigate = useNavigate();
+  const { userSignIn } = useAuthentication();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);

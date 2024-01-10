@@ -1,47 +1,35 @@
+import { useContext } from 'react';
 import { AuthenticationService } from '../../api';
-import { FormValues } from '../types';
+import { AuthContext } from '../../context/AuthProvider';
 
-export const userSignIn = async (userCredentials: {
-  email: string;
-  password: string;
-}) => {
-  try {
-    const authResponse =
-      await AuthenticationService.authenticationControllerSingIn(
-        userCredentials
-      );
+export const useAuthentication = () => {
+  const authContext = useContext(AuthContext);
 
-    if (!authResponse) {
-      throw new Error('Invalid credentials');
-    }
-
-    setAuthToken(authResponse.accessToken);
-    return authResponse;
-  } catch (error) {
-    throw new Error('Unable to sign in');
+  if (!authContext) {
+    throw new Error('AuthProvider not found in the component tree');
   }
-};
 
-const setAuthToken = (token: string) =>
-  localStorage.setItem('access_token', token);
+  const { setAuth } = authContext;
 
-export const userSingUp = async (userCredentials: {
-  email: string;
-  password: string;
-}) => {
-  try {
-    const authResponse =
-      await AuthenticationService.authenticationControllerSingUp(
-        userCredentials
-      );
+  const userSignIn = async (userCredentials: {
+    email: string;
+    password: string;
+  }) => {
+    try {
+      const authResponse =
+        await AuthenticationService.authenticationControllerSingIn(
+          userCredentials
+        );
 
-    if (!authResponse) {
-      throw new Error('Invalid credentials');
+      if (!authResponse) {
+        throw new Error('Invalid credentials');
+      }
+
+      setAuth(authResponse.accessToken);
+      return authResponse;
+    } catch (error) {
+      throw new Error('Unable to sign in');
     }
-
-    setAuthToken(authResponse.accessToken);
-    return authResponse;
-  } catch (error) {
-    throw new Error('Unable to sign in');
-  }
+  };
+  return { userSignIn };
 };
