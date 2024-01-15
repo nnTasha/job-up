@@ -1,4 +1,5 @@
-import { FC, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import {
@@ -12,6 +13,7 @@ import {
 import { FormValues } from './types';
 import { AuthenticationService } from '../api';
 import { useAuthentication } from './authentication/AccountManagement';
+import { AuthContext } from '../context/AuthProvider';
 
 interface AuthFormProps {
   isSignUp: boolean;
@@ -33,25 +35,39 @@ const AuthForm: FC<AuthFormProps> = ({ isSignUp }) => {
     formState: { errors },
   } = form;
 
-  const { userSignIn } = useAuthentication();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const onFormSubmit = (data: FormValues) => {
+  const { userSignIn } = useAuthentication();
+  const authContext = useContext(AuthContext);
+
+  if (!authContext) {
+    throw new Error('AuthProvider not found in the component tree');
+  }
+
+  const { auth } = authContext;
+
+  const navigate = useNavigate();
+
+  const onFormSubmit = (formData: FormValues) => {
     isSignUp
       ? AuthenticationService.authenticationControllerSingUp({
           //userName : data.username as string,
-          email: data.email as string,
-          password: data.password as string,
+          email: formData.email as string,
+          password: formData.password as string,
           //confirmPassword : data.confirmPassword as string
         })
       : userSignIn({
-          email: data.email as string,
-          password: data.password as string,
+          email: formData.email as string,
+          password: formData.password as string,
         });
-    // navigate('/user-profile');
   };
+
+  //TODO: rethink it :)
+  useEffect(() => {
+    auth && navigate('/user-profile');
+  }, [auth]);
 
   return (
     <form onSubmit={handleSubmit(onFormSubmit)}>

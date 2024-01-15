@@ -1,15 +1,8 @@
-import { useContext } from 'react';
 import { AuthenticationService } from '../../api';
-import { AuthContext } from '../../context/AuthProvider';
+import useAuthContext from '../../hooks/useAuthContext';
 
 export const useAuthentication = () => {
-  const authContext = useContext(AuthContext);
-
-  if (!authContext) {
-    throw new Error('AuthProvider not found in the component tree');
-  }
-
-  const { setAuth } = authContext;
+  const { setAuth } = useAuthContext();
 
   const userSignIn = async (userCredentials: {
     email: string;
@@ -20,10 +13,6 @@ export const useAuthentication = () => {
         await AuthenticationService.authenticationControllerSingIn(
           userCredentials
         );
-
-      if (!authResponse) {
-        throw new Error('Invalid credentials');
-      }
 
       setAuth(authResponse.accessToken);
       return authResponse;
