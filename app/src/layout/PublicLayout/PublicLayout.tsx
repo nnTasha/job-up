@@ -1,11 +1,10 @@
-import { Grid } from '@mui/material';
 import { FC } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-
-import SignIn from '../../common/components/signIn/SignIn';
-import SignUp from '../../common/components/signUp/SignUp';
-import Label from '../../common/components/label/Label';
-import theme from '../../theme';
+import { Grid } from '@mui/material';
+import SignIn from '@/common/components/signIn/SignIn';
+import SignUp from '@/common/components/signUp/SignUp';
+import Label from '@/common/components/label/Label';
+import theme from '@/theme';
 
 interface PublicLayoutProps {}
 

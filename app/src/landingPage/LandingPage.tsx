@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 import { Grid } from '@mui/material';
-import theme from '../theme';
+import theme from '@/theme';
 interface LandingPageProps {
   description: ReactNode;
   content: ReactNode;

@@ -1,8 +1,8 @@
-import DeskImage from '../src/assets/desk.svg?react';
+import { SvgIcon } from '@mui/material';
+import DeskImage from '@/assets/desk.svg?react';
 import LandingPageDescription from './landingPage/LandingPageDescription';
 import LandingPage from './landingPage/LandingPage';
 import './App.css';
-import { SvgIcon } from '@mui/material';
 
 function App() {
   return (

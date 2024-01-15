@@ -1,5 +1,5 @@
-import { AuthenticationService } from '../../api';
-import useAuthContext from '../../hooks/useAuthContext';
+import { AuthenticationService } from '@/api';
+import useAuthContext from '@/hooks/useAuthContext';
 
 export const useAuthentication = () => {
   const { setAuth } = useAuthContext();

@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
@@ -11,9 +11,10 @@ import {
   TextField,
 } from '@mui/material';
 import { FormValues } from './types';
-import { AuthenticationService } from '../api';
+
 import { useAuthentication } from './authentication/AccountManagement';
-import { AuthContext } from '../context/AuthProvider';
+import { AuthenticationService } from '@/api';
+import useAuthContext from '@/hooks/useAuthContext';
 
 interface AuthFormProps {
   isSignUp: boolean;
@@ -40,13 +41,8 @@ const AuthForm: FC<AuthFormProps> = ({ isSignUp }) => {
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const { userSignIn } = useAuthentication();
-  const authContext = useContext(AuthContext);
 
-  if (!authContext) {
-    throw new Error('AuthProvider not found in the component tree');
-  }
-
-  const { auth } = authContext;
+  const { auth } = useAuthContext();
 
   const navigate = useNavigate();
 

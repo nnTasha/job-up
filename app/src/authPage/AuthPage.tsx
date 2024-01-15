@@ -8,10 +8,10 @@ import {
   SvgIcon,
   Typography,
 } from '@mui/material';
-import LaunchIcon from '../assets/launch.svg?react';
+import LaunchIcon from '@/assets/launch.svg?react';
 import ClearIcon from '@mui/icons-material/Clear';
 import AuthForm from './AuthForm';
-import theme from '../theme';
+import theme from '@/theme';
 
 const pageTitle = {
   '/signin': 'SIGN IN',
